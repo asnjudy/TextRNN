@@ -48,8 +48,17 @@ def impl2():
         helper.evaluate(x_word_ids[:100], y[:100])
 
 
+def impl3():
+    from impl3.keras_text_cnn import keras_cnn_text
+
+    model = keras_cnn_text(Config.sequence_length, Config.vocab_size, Config.embedding_dim,
+                           Config.num_classes)
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    model.fit(x_train, y_train, batch_size=Config.batch_size, epochs=3, validation_data=(x_test, y_test))
+
+
 def main(argv=None):
-    impl2()
+    impl3()
 
 
 if __name__ == '__main__':

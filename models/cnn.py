@@ -46,7 +46,7 @@ class TextCNN(object):
             with tf.name_scope(conv_op_name):
                 filter_shape = [filter_size, self.embedding_size, 1, self.num_filters]
                 W = tf.Variable(tf.truncated_normal(filter_shape, stddev=0.1), name='kernel')
-                b = tf.Variable(tf.constant(0.1, shape=(self.num_filters,)), name='bias')
+                b = tf.Variable(tf.constant(0.1, shape=(self.num_filters, )), name='bias')
                 # 卷积操作，假设 filter_size=3, num_filters=64
                 # (None, 100, 256, 1) -> (None, 98, 1, 64)
                 conv_out = tf.nn.conv2d(inputs_embedded_expanded,
@@ -86,7 +86,7 @@ class TextCNN(object):
             input_units = fc1_in.shape[1].value
             print("fc1 input units:", input_units)
             W = tf.Variable(tf.truncated_normal((input_units, self.num_classes), stddev=0.1), name='kernel')
-            b = tf.Variable(tf.constant(0.1, shape=(self.num_classes,)), name='bias')
+            b = tf.Variable(tf.constant(0.1, shape=(self.num_classes, )), name='bias')
             fc1_out = tf.nn.bias_add(tf.matmul(fc1_in, W), b)
             print("## fc1 outputs:", fc1_out)
             self.weights.append(W)
